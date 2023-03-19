@@ -38,7 +38,7 @@ const donor = mongoose.Schema({
         }
     },
    
-    care_centre : [ // max 3 centres
+    care_centre :
         {
             org_name : {
                 type : String
@@ -49,8 +49,7 @@ const donor = mongoose.Schema({
             org_type : { // drop down
                 type : String
             }
-        }
-    ],
+        },
     blogs_posted : {
         type : Number
     },

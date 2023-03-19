@@ -12,9 +12,6 @@ const userSchema = mongoose.Schema({
     phone_number:{
         type:Number
     },
-    gender:{
-        type:String
-    },
     role: {
         type :String,
         default : 'default'
@@ -22,11 +19,8 @@ const userSchema = mongoose.Schema({
     createdAt : {
         type : Date,
         default : Date.now,
-    },
-    good_will_points : {
-        type : Number,
-    },
-
+    }
+   
 });
 
 module.exports = mongoose.model("Room", RoomSchema);

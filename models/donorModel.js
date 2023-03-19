@@ -37,8 +37,7 @@ const donor = mongoose.Schema({
     mention_count : {
         type : Number
     },
-    donation_centre : [ // max 3 centres
-        {
+    donation_centre :  {
             org_name : {
                 type : String
             },
@@ -48,8 +47,7 @@ const donor = mongoose.Schema({
             org_type : {
                 type : String
             }
-        }
-    ],
+     },
     total_donations : {
         type : Number
     }
