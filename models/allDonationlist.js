@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const reservation_list = mongoose.Schema({
+const all_complete_donations = mongoose.Schema({
    
       reserved_by: {
         firebase_id : {
@@ -12,15 +12,12 @@ const reservation_list = mongoose.Schema({
           type: Number,
         },
       },
-      card_number : {
-        type : Number
-      },
-      donation_card: {
-        type:mongoose.Schema.Types.ObjectId
-      },
+     
+      donation_cards: [{type:mongoose.Schema.Types.ObjectId}],
       reservedAt : {
        type : String
     },
     
 });
-module.exports = mongoose.model("reservation_list",reservation_list);
+
+module.exports = mongoose.model("all donations",all_complete_donations)
