@@ -24,6 +24,7 @@ const blogs = mongoose.Schema({
   },
   clicks: {
     type: Number,
+    default:1
   },
   shareCount: {
     type: Number,

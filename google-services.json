@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "263014604161",
+    "project_id": "leftoverfood-ef2e2",
+    "storage_bucket": "leftoverfood-ef2e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263014604161:android:6ec9df04f4300972945c80",
+        "android_client_info": {
+          "package_name": "com.example.lof"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263014604161-ubdljiulomdk00me1m9ha3lgh4qc8u4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJhJh4J2v_DX7gzAvf3dhz2MDKqH1OklI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263014604161-ubdljiulomdk00me1m9ha3lgh4qc8u4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
