@@ -19,6 +19,7 @@ exports.addDonation = async (req, res) => {
     user_id : donor[0]._id,
     user_name : donor[0].owner_name,
     user_number : donor[0].owner_number,
+    firebase_id : donor[0].firebase_id,
     user_goodwill_points : donor[0].goodwillpoints
   }
   

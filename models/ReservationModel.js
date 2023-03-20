@@ -8,6 +8,9 @@ const reservation_list = mongoose.Schema({
         user_name: {
           type: String,
         },
+        org_name:{
+          type : String
+        },
         user_number: {
           type: Number,
         },

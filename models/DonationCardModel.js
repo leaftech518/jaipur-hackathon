@@ -16,6 +16,9 @@ const donationCard = mongoose.Schema({
             type: mongoose.Schema.ObjectId,
             ref: "User",
         },
+        firebase_id : {
+            type : String
+        },
         user_name : {
             type : String
         },

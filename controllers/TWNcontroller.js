@@ -153,5 +153,4 @@ exports.allOffers = async (req, res) => { // top goodwill point donations
     message : "Showing all donation list",
     allDonations
   });
-
 };
