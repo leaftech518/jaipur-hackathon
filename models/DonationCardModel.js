@@ -1,21 +1,35 @@
 const mongoose = require("mongoose");
 const donationCard = mongoose.Schema({
-    food_from_org : { // org name
-        type : String
+    donation_centre :  {
+        org_name : {
+            type : String
+        },
+        org_add : {
+            type : String
+        },
+        org_type : {
+            type : String
+        }
     },
-    owner_name : {
-        type :String
-    },
-    owner_number :{
-        type : Number
-    },
-    add_of_org  : {
-        type : String
+    posted_by : {
+        user_id : {
+            type: mongoose.Schema.ObjectId,
+            ref: "User",
+        },
+        user_name : {
+            type : String
+        },
+        user_number : {
+            type : String
+        },
+        user_goodwill_points : {
+            type : Number
+        }
     },
     food_type : {
         type : String,
         enum : {
-            values : ["raw material","cooked food","others"],
+            values : ["raw food","cooked meal","others"],
             message : "Please select from the following category"
         }
     },
@@ -26,12 +40,7 @@ const donationCard = mongoose.Schema({
         type : Number
     },
     food_life_time : {
-        date : {
-            type : String
-        },
-        time : {
-            type : String
-        }
+        type : String
     },
     photo_of_the_food : {
         id : {
@@ -48,6 +57,9 @@ const donationCard = mongoose.Schema({
         picked_time : {
             type : String
         },
+        pick_up_time : {
+            type : String
+        },
         picked_by : {
             type : String
         },
@@ -60,6 +72,12 @@ const donationCard = mongoose.Schema({
    },
    card_number : {
     type : Number
+   },
+   post_time : {
+    type : String
+   },
+   blog_posted : {
+    type : Boolean
    }
 
 });

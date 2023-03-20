@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const OTPSchema = mongoose.Schema({
+const OTPSchema = new mongoose.Schema({
     OTP : {
         type : Number
     },

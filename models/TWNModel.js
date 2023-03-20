@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
-const donor = mongoose.Schema({
+const TWN = mongoose.Schema({
   owner_name: {
     type: String,
   },
   owner_number: {
     type: Number,
+  },
+  firebase_id : {
+    type : String
   },
   city: {
     type: String,
@@ -12,62 +15,14 @@ const donor = mongoose.Schema({
   state: {
     type: String,
   },
-  good_people: {
-    // number of Poeple who need help
-    type: Number,
-  },
-  photos: [
-    {
-      id: {
-        type: String,
-      },
-      secure_url: {
-        type: String,
-      },
-    },
-  ],
   goodwillpoints: {
     type: Number,
     default: 100,
   },
   created_at: {
-    date: {
-      type: String,
-    },
-    time: {
-      type: String,
-    },
-<<<<<<< HEAD
-    state : {
-        type : String
-    },
-    good_people : { // number of Poeple who need help
-        type : Number
-    },
-    photos: [
-        {
-          id: {
-            type: String,
-          },
-          secure_url: {
-            type: String,
-          },
-        },
-    ],
-    goodwillpoints : {
-        type : Number,
-        default : 100
-    },
-    created_at : {
-        date :{
-            type : String
-        },
-        time : {
-            type : String
-        }
-    },
-   
-    care_centre :
+   type : String
+  },
+  care_centre :
         {
             org_name : {
                 type : String
@@ -77,37 +32,29 @@ const donor = mongoose.Schema({
             },
             org_type : { // drop down
                 type : String
+            },
+            good_people : { // number of Poeple who need help
+              type : Number
+            },
+            photo:
+            {
+              id: {
+                type: String,
+              },
+              secure_url: {
+                type: String,
+              },
             }
-        },
+    },
     blogs_posted : {
-        type : Number
+        type : Number,
+        default : 0
     },
     total_received : {
-        type : Number
+        type : Number,
+        default : 0
     }
-=======
-  },
->>>>>>> 2ae59bb6a58d337d4c1cba0fdb3fd94467f87b22
 
-  care_centre: [
-    // max 3 centres
-    {
-      org_name: {
-        type: String,
-      },
-      org_add: {
-        type: String,
-      },
-      org_type: {
-        // drop down
-        type: String,
-      },
-    },
-  ],
-  blogs_posted: {
-    type: Number,
-  },
-  total_received: {
-    type: Number,
-  },
 });
+
+module.exports = mongoose.model("receiver",TWN)

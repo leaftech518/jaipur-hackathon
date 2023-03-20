@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
-    name:{
-        type:String
-    },
     firebase_id:{
         type:String
     },
@@ -17,10 +14,9 @@ const userSchema = mongoose.Schema({
         default : 'default'
     },
     createdAt : {
-        type : Date,
-        default : Date.now,
+        type : String
     }
    
 });
 
-module.exports = mongoose.model("Room", RoomSchema);
+module.exports = mongoose.model("user", userSchema);

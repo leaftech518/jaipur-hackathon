@@ -1,29 +1,60 @@
 const RequestCardModel = require("../models/RequestCardModel");
 const BlogModel = require("../models/BlogModel");
-const BlogModel = require("../models/BlogModel");
+const DonationCardModel = require("../models/DonationCardModel");
+const cloudinary = require("cloudinary");
+const moment = require("moment");
+const TWNModel = require("../models/TWNModel");
 
 exports.createTWN = async (req, res) => {
+  const user = req.user
+  if(user.role !== "receiver"){
+    res.send({
+      status : false,
+      message : "User is not a receiver!"
+    })
+  }
   const {
     owner_name,
-    owner_number,
     city,
     state,
-    goodwillpoints,
     org_name,
     org_add,
     org_type,
+    good_people
   } = req.body;
 
+  if (!req.files) {
+    return res.send({
+      status: true,
+      message: "Picture not found!",
+    });
+  }
+
+  let result;
+
+  let file = req.files.photo;
+  result = await cloudinary.v2.uploader.upload(
+    file.tempFilePath,
+    { folder: "hackathon/donations" }
+  );
+
+  let timenow = moment().format('MMMM Do YYYY, h:mm:ss a');
   const twn = await TWNModel.create({
     owner_name,
-    owner_number,
+    owner_number : user.phone_number,
     city,
     state,
-    goodwillpoints,
-    donation_center: {
+    created_at : timenow,
+    firebase_id : user.firebase_id,
+    care_centre: {
       org_name,
       org_add,
       org_type,
+      good_people,
+      photo : {
+        id: result.public_id,
+        public_url: result.secure_url,
+      }
     },
   });
   if (!twn) {
@@ -36,26 +67,34 @@ exports.createTWN = async (req, res) => {
 
   res.send({
     status: true,
-    message: "All set for the donor.",
+    message: "All set for the receiving donations.",
     twn,
   });
 };
 
 exports.postRequirements = async (req, res) => {
-  const { org_name, name, number, date, time, food_for, message } = req.body;
+  const user = req.user
+  if(user.role !== "receiver"){
+    res.send({
+      status : false,
+      message : "User is not a receiver!"
+    })
+  }
+
+  const receivers =  await TWNModel.find({firebase_id : user.firebase_id})
+  const care_centre = receivers[0].care_centre
+
+  const { required_by,food_for,name,number } = req.body;
 
   const requestCard = await RequestCardModel.create({
-    org_name,
+    org_name : care_centre.org_name,
+    org_add : care_centre.org_add,
     contact_details: {
       name,
       number,
     },
-    required_by: {
-      date,
-      time,
-    },
+    required_by,
     food_for,
-    message,
   });
 
   if(!requestCard) {
@@ -72,6 +111,7 @@ exports.postRequirements = async (req, res) => {
     requestCard
   })
 };
+
 exports.postBlog = async (req, res) => {
   const {title,description} = req.body
   let result;
@@ -91,12 +131,27 @@ exports.postBlog = async (req, res) => {
 
 
   const blog = await BlogModel.create({
-title,
-description,
-photos:{
-  id:result.public_id,
-  secure_url : result.public_url
-}
-  })
+      title,
+      description,
+      photos:{
+        id:result.public_id,
+        secure_url : result.public_url
+      }
+  });
 };
-exports.allOffers = async (req, res) => {};
+exports.allOffers = async (req, res) => { // top goodwill point donations
+  const user = req.user
+  if(user.role !== "receiver"){
+    res.send({
+      status : false,
+      message : "User is not a receiver"
+    });
+  }
+  const allDonations = await DonationCardModel.find().sort({"posted_by.user_goodwill_points" : -1});
+  res.send({
+    status : true,
+    message : "Showing all donation list",
+    allDonations
+  });
+
+};

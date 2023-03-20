@@ -6,52 +6,35 @@ const donor = mongoose.Schema({
   owner_number: {
     type: Number,
   },
+  firebase_id : {
+    type : String
+  },
   city: {
     type: String,
   },
   state: {
     type: String,
   },
-  photos: {
+  photo: {
     id: {
       type: String,
     },
     secure_url: {
       type: String,
-    },
-<<<<<<< HEAD
-    city : {
-        type : String
-    },
-    state : {
-        type : String
-    },
-    photos: [
-        {
-          id: {
-            type: String,
-          },
-          secure_url: {
-            type: String,
-          },
-        },
-    ],
-    goodwillpoints : {
+    }
+  },
+  goodwillpoints : {
         type : Number,
         default : 1
-    },
-    created_at : {
-        date :{
-            type : String
-        },
-        time : {
-            type : String
-        }
-    },
-    mention_count : {
-        type : Number
-    },
-    donation_centre :  {
+  },
+  created_at : {
+        type : String
+  },
+  mention_count : {
+        type : Number,
+        default : 0
+  },
+  donation_centre :  {
             org_name : {
                 type : String
             },
@@ -61,44 +44,12 @@ const donor = mongoose.Schema({
             org_type : {
                 type : String
             }
-     },
+    },
     total_donations : {
-        type : Number
+        type : Number,
+        default : 0
     }
-=======
-  },
->>>>>>> 2ae59bb6a58d337d4c1cba0fdb3fd94467f87b22
 
-  goodwillpoints: {
-    type: Number,
-    default: 1,
-  },
-  created_at: {
-    date: {
-      type: String,
-    },
-    time: {
-      type: String,
-    },
-  },
-  mention_count: {
-    type: Number,
-  },
-  donation_centre: [
-    // max 3 centres
-    {
-      org_name: {
-        type: String,
-      },
-      org_add: {
-        type: String,
-      },
-      org_type: {
-        type: String,
-      },
-    },
-  ],
-  total_donations: {
-    type: Number,
-  },
 });
+
+module.exports = mongoose.model("donor", donor);

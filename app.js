@@ -28,12 +28,11 @@ app.use(morgan("tiny"));
 // import all the routed
 
 const donation = require("./routes/donationRoute");
+const userRoute = require("./routes/userRoute");
+const receiver = require("./routes/receiverRoute");
 
 // router middleware
 app.use("/api/v1", donation);
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/razorpay.html"));
-// });
-// exporting app js
+app.use("/api/v1",userRoute);
+app.use("/api/v1",receiver);
 module.exports = app;

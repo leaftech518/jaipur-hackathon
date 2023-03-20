@@ -3,11 +3,11 @@ const requestCard = mongoose.Schema({
     org_name : {
         type : String
     },
-    owner_name : {
+    firebase_id : {
         type : String
     },
-    owner_number : {
-        type : Number
+    org_add : {
+        type : String
     },
     contact_details : {
         name : {
@@ -18,12 +18,11 @@ const requestCard = mongoose.Schema({
         }
     },
     required_by : {
-        date : {
-            type : String
-        },
-        time : {
-            type : String
-        }
+       type : String,
+       enum : {
+        values : ["lunch","dinner","urgent"],
+        message : "Please select only these values"
+       }
     },
     posted_ago : {
         type : String
@@ -32,8 +31,9 @@ const requestCard = mongoose.Schema({
         type : Number
     },
     message : {
-        type : String
+        type : String,
+        default : "Thank You!"
     }
 });
 
-module.exports = mongoose.model("requestCard",requestCard);
+module.exports = mongoose.model("requestCard",requestCard); 
