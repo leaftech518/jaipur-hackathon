@@ -56,6 +56,29 @@ exports.sendReservationNotification = (token,body,title) => {
 
 }
 
+exports.sendBlogNotification = (token,card_number,body,title) => {
+  const messageBlogNotification = {
+   data : {
+    title : title,
+    body : body
+   },
+   token,
+   android: {
+    priority: "high",
+  },
+  };
+  admin
+    .messaging()
+    .send(messageBlogNotification)
+    .then((response) => {
+      // Response is a message ID string.
+      console.log("Successfully sent message:", response);
+    })
+    .catch((error) => {
+      console.log("Error sending message:", error);
+    });
+}
+
 
 
 

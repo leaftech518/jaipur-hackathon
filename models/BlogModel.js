@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const blogs = mongoose.Schema({
-  photos: {
+  photo: {
     id: {
       type: String,
     },
-    secure_url: {
+    public_url: {
       type: String,
     },
   },
@@ -41,9 +41,8 @@ const blogs = mongoose.Schema({
     },
   },
   published_by: {
-    _id: {
-      type: mongoose.Schema.ObjectId,
-      ref: "TWN",
+    firebase_id: {
+      type: String
     },
     name: {
       type: String,
@@ -51,6 +50,13 @@ const blogs = mongoose.Schema({
     org_name: {
       type: String,
     },
+  },
+  published : {
+    type : Boolean,
+    default : false
+  },
+  card_number : {
+    type : Number
   },
 });
 

@@ -9,6 +9,9 @@ const requestCard = mongoose.Schema({
     org_add : {
         type : String
     },
+    goodwillpoints : {
+        type : Number
+    },
     contact_details : {
         name : {
             type : String

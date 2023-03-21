@@ -4,6 +4,7 @@ const DonationCardModel = require("../models/DonationCardModel");
 const cloudinary = require("cloudinary");
 const moment = require("moment");
 const TWNModel = require("../models/TWNModel");
+const { async } = require("@firebase/util");
 
 exports.createTWN = async (req, res) => {
   const user = req.user
@@ -112,41 +113,9 @@ exports.postRequirements = async (req, res) => {
   })
 };
 
-exports.postBlog = async (req, res) => {
-  const {title,description} = req.body
-  let result;
-  if (!req.files) {
-    return res.send({
-      status: false,
-      message: "Image is required...!!!",
-    });
-  }
-  if (req.files) {
-    result = await cloudinary.v2.uploader.upload(
-      req.files.photo_of_the_food.tempFilePath,
-      { folder: "hackathon/blog" }
-    );
-    // console.log("Result of the images here...",result);
-  }
-
-
-  const blog = await BlogModel.create({
-      title,
-      description,
-      photos:{
-        id:result.public_id,
-        secure_url : result.public_url
-      }
-  });
-};
 exports.allOffers = async (req, res) => { // top goodwill point donations
   const user = req.user
-  if(user.role !== "receiver"){
-    res.send({
-      status : false,
-      message : "User is not a receiver"
-    });
-  }
+  
   const allDonations = await DonationCardModel.find().sort({"posted_by.user_goodwill_points" : -1});
   res.send({
     status : true,
@@ -154,3 +123,20 @@ exports.allOffers = async (req, res) => { // top goodwill point donations
     allDonations
   });
 };
+
+exports.showrequests = async(req,res) => {
+  const user = req.user
+  const allrequests = await RequestCardModel.find().sort({goodwillpoints : 1});
+  if(allrequests){
+    res.send({
+      status : true,
+      message : "Showing all requests list",
+      allrequests
+    });
+  }else{
+    res.send({
+      status : false,
+      message : "Error fetching the request list",
+    });
+  }
+}
